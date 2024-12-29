@@ -1,86 +1,27 @@
 ﻿using System;
 
-// Base Animal Class
-class Animal
+// Interface for length
+interface ILength
 {
-    public void Eat()
-    {
-        Console.WriteLine("I can eat!");
-    }
-
-    public virtual void MakeSound()
-    {
-        Console.WriteLine("I make a sound.");
-    }
+    double Length { get; set; }
 }
 
-// Dog Class inheriting from Animal
-class Dog : Animal
+// Interface for width
+interface IWidth
 {
-    public void Bark()
-    {
-        Console.WriteLine("I can bark!");
-    }
-
-    public override void MakeSound()
-    {
-        Console.WriteLine("Woof! Woof!");  // Override the base class sound
-    }
+    double Width { get; set; }
 }
 
-// Cat Class inheriting from Animal
-class Cat : Animal
+// Rectangle class implementing both interfaces
+class Rectangle : ILength, IWidth
 {
-    public void Meow()
-    {
-        Console.WriteLine("I can meow!");
-    }
+    public double Length { get; set; }
+    public double Width { get; set; }
 
-    public override void MakeSound()
+    // Method to calculate area
+    public double CalculateArea()
     {
-        Console.WriteLine("Meow! Meow!");
-    }
-}
-
-// Bird Class inheriting from Animal
-class Bird : Animal
-{
-    public void Chirp()
-    {
-        Console.WriteLine("I can chirp!");
-    }
-
-    public override void MakeSound()
-    {
-        Console.WriteLine("Tweet! Tweet!");
-    }
-}
-
-// Fish Class inheriting from Animal
-class Fish : Animal
-{
-    public void Swim()
-    {
-        Console.WriteLine("I can swim!");
-    }
-
-    public override void MakeSound()
-    {
-        Console.WriteLine("Blub blub!");  // Fish don't really make sound, but we give it a sound.
-    }
-}
-
-// Elephant Class inheriting from Animal
-class Elephant : Animal
-{
-    public void Trumpet()
-    {
-        Console.WriteLine("I can trumpet!");
-    }
-
-    public override void MakeSound()
-    {
-        Console.WriteLine("Pawoo! Pawoo!");
+        return Length * Width;
     }
 }
 
@@ -88,39 +29,18 @@ class Program
 {
     static void Main(string[] args)
     {
-        // Create objects of each animal
-        Dog dog = new Dog();
-        Console.WriteLine("Dog:");
-        dog.Eat();
-        dog.Bark();
-        dog.MakeSound();  // Calling overridden method
-        Console.WriteLine();
+        // Create a new rectangle instance
+        Rectangle rect = new Rectangle();
 
-        Cat cat = new Cat();
-        Console.WriteLine("Cat:");
-        cat.Eat();
-        cat.Meow();
-        cat.MakeSound();
-        Console.WriteLine();
+        // Set the length and width
+        Console.Write("Enter the length of the rectangle: ");
+        rect.Length = Convert.ToDouble(Console.ReadLine());
 
-        Bird bird = new Bird();
-        Console.WriteLine("Bird:");
-        bird.Eat();
-        bird.Chirp();
-        bird.MakeSound();
-        Console.WriteLine();
+        Console.Write("Enter the width of the rectangle: ");
+        rect.Width = Convert.ToDouble(Console.ReadLine());
 
-        Fish fish = new Fish();
-        Console.WriteLine("Fish:");
-        fish.Eat();
-        fish.Swim();
-        fish.MakeSound();
-        Console.WriteLine();
-
-        Elephant elephant = new Elephant();
-        Console.WriteLine("Elephant:");
-        elephant.Eat();
-        elephant.Trumpet();
-        elephant.MakeSound();
+        // Calculate and display the area
+        double area = rect.CalculateArea();
+        Console.WriteLine($"\nThe area of the rectangle is: {area}");
     }
 }
